@@ -1,0 +1,123 @@
+.trainRouteContainer {
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.routeHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.routeBullet {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.routeInfo {
+  flex-grow: 1;
+}
+
+.routeName {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 0 5px 0;
+}
+
+.routeDescription {
+  font-size: 0.9rem;
+  color: #666;
+  margin: 0;
+}
+
+.stopsContainer {
+  position: relative;
+  padding-left: 15px;
+}
+
+.verticalLine {
+  position: absolute;
+  left: 14px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: #ddd;
+  z-index: 1;
+}
+
+.stopItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
+}
+
+.stopBullet {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  margin-right: 12px;
+  flex-shrink: 0;
+  font-size: 0.8rem;
+}
+
+.stopInfo {
+  flex-grow: 1;
+}
+
+.stopName {
+  font-weight: 500;
+  margin: 0 0 3px 0;
+}
+
+.stopCoords {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 0;
+}
+
+/* Custom marker styles for map */
+.mapMarker {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.mapMarkerPopup {
+  padding: 8px;
+  text-align: center;
+}
+
+.mapMarkerPopupName {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.mapMarkerPopupNumber {
+  font-size: 0.9rem;
+  color: #666;
+}

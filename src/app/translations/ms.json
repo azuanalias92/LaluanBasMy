@@ -1,0 +1,84 @@
+{
+  "nav.home": "Utama",
+  "nav.map": "Peta",
+  
+  "home.badge": "🚌 Pengangkutan Awam Dipermudahkan",
+  "home.title": "Jelajahi Laluan Bas di Alor Setar",
+  "home.subtitle": "Navigasi bandar dengan yakin menggunakan penjelajah laluan bas interaktif kami. Cari perhentian, rancang perjalanan anda, dan temui sambungan terbaik di seluruh Kedah.",
+  "home.exploreMap": "Jelajahi Peta",
+  "home.learnMore": "Ketahui Lebih Lanjut",
+  
+  "home.features.title": "Semua yang anda perlukan untuk perjalanan anda",
+  "home.features.subtitle": "Alat dan ciri komprehensif untuk menjadikan pengangkutan awam lebih mudah dan lebih mudah diakses.",
+  
+  "home.feature1.title": "Peta Interaktif",
+  "home.feature1.description": "Jelajahi laluan bas dengan peta interaktif terperinci yang dikuasakan oleh Mapbox GL",
+  
+  "home.feature2.title": "Perancangan Laluan",
+  "home.feature2.description": "Cari laluan dan sambungan terbaik untuk perjalanan anda di seluruh Alor Setar",
+  
+  "home.feature3.title": "Kemas Kini Masa Nyata",
+  "home.feature3.description": "Dapatkan maklumat langsung tentang jadual bas dan perubahan laluan",
+  
+  "home.feature4.title": "Didorong Komuniti",
+  "home.feature4.description": "Dibina untuk komuniti dengan maklum balas pengguna dan pandangan tempatan",
+  
+  "home.cta.title": "Bersedia untuk memulakan perjalanan anda?",
+  "home.cta.subtitle": "Temui laluan bas, cari perhentian berdekatan, dan rancang perjalanan anda dengan peta interaktif kami.",
+  "home.cta.button": "Buka Peta",
+  
+  "map.title": "Peta Interaktif",
+  "map.subtitle": "Jelajahi laluan bas di Alor Setar, Kedah dengan peta interaktif kami yang dikuasakan oleh Mapbox GL",
+  
+  "map.routeExplorer": "Penjelajah Laluan",
+  "map.routeExplorerDesc": "Pilih laluan untuk melihat laluan dan perhentiannya di peta",
+  
+  "map.routeOverview": "Gambaran Keseluruhan Laluan",
+  "map.routeOverviewDesc": "Visualisasi untuk",
+  
+  "map.howToUse": "Cara Penggunaan",
+  
+  "map.step1.title": "Pilih Laluan",
+  "map.step1.desc": "Pilih dari dropdown untuk melihat butiran laluan",
+  
+  "map.step2.title": "Jelajahi Peta",
+  "map.step2.desc": "Zum dan pan untuk melihat laluan dan perhentian",
+  
+  "map.step3.title": "Cari Perhentian Terdekat",
+  "map.step3.desc": "Klik butang lokasi 📍 untuk mencari perhentian berdekatan",
+  
+  "map.about.title": "Tentang Peta Ini",
+  "map.about.description": "Dibina dengan Mapbox GL JS dan React Map GL, peta interaktif ini memaparkan laluan bas di Alor Setar menggunakan teknologi web moden.",
+  
+  "map.features.title": "Ciri-ciri",
+  "map.features.item1": "Visualisasi laluan gaya kereta api",
+  "map.features.item2": "Peta interaktif dengan zum/pan",
+  "map.features.item3": "Pencari perhentian terdekat",
+  "map.features.item4": "Pemilihan laluan masa nyata",
+  
+  "map.nearestStop": "Perhentian Bas Terdekat",
+  "map.nearestStopDesc": "Perhentian bas terdekat dengan lokasi semasa anda",
+  "map.navigateToStop": "Navigasi ke Perhentian",
+  "map.backToRoute": "Kembali ke Laluan",
+  
+  "routeSelector.label": "Pilih Laluan Bas",
+  "routeSelector.placeholder": "-- Pilih laluan --",
+  "routeSelector.comingSoon": "Lebih banyak laluan akan ditambah pada masa hadapan!",
+  
+  "language": "Bahasa",
+  "language.en": "English",
+  "language.ms": "Bahasa Melayu",
+
+  "home.apps.banner.title": "Aplikasi Mudah Alih Akan Datang!",
+  "home.apps.banner.subtitle": "Kami sedang membangunkan aplikasi mudah alih untuk Android dan iOS. Dapatkan akses mudah ke laluan bas di mana-mana sahaja.",
+  "home.apps.banner.button": "Daftar untuk Pemberitahuan",
+  
+  "footer.buyMeCoffee": "Belanja Saya Kopi",
+  "footer.rights": "Hak Cipta Terpelihara.",
+  
+  "timetable.title": "Jadual Bas",
+  "timetable.description": "Anggaran masa berlepas untuk setiap perhentian di laluan ini.",
+  "timetable.stopName": "Nama Perhentian",
+  "timetable.departureTimes": "Masa Berlepas",
+  "timetable.disclaimer": "Nota: Masa adalah anggaran dan tertakluk kepada keadaan trafik."
+}

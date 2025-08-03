@@ -1,0 +1,84 @@
+{
+  "nav.home": "Home",
+  "nav.map": "Map",
+  
+  "home.badge": "🚌 Public Transportation Made Easy",
+  "home.title": "Explore Bus Routes in Alor Setar",
+  "home.subtitle": "Navigate the city with confidence using our interactive bus route explorer. Find stops, plan your journey, and discover the best connections across Kedah.",
+  "home.exploreMap": "Explore Map",
+  "home.learnMore": "Learn More",
+  
+  "home.features.title": "Everything you need for your journey",
+  "home.features.subtitle": "Comprehensive tools and features to make public transportation easier and more accessible.",
+  
+  "home.feature1.title": "Interactive Maps",
+  "home.feature1.description": "Explore bus routes with detailed interactive maps powered by Mapbox GL",
+  
+  "home.feature2.title": "Route Planning",
+  "home.feature2.description": "Find the best routes and connections for your journey across Alor Setar",
+  
+  "home.feature3.title": "Real-time Updates",
+  "home.feature3.description": "Get live information about bus schedules and route changes",
+  
+  "home.feature4.title": "Community Driven",
+  "home.feature4.description": "Built for the community with user feedback and local insights",
+  
+  "home.cta.title": "Ready to start your journey?",
+  "home.cta.subtitle": "Discover bus routes, find nearby stops, and plan your trips with our interactive map.",
+  "home.cta.button": "Open Map",
+  
+  "map.title": "Interactive Map",
+  "map.subtitle": "Explore bus routes in Alor Setar, Kedah with our interactive map powered by Mapbox GL",
+  
+  "map.routeExplorer": "Route Explorer",
+  "map.routeExplorerDesc": "Select a route to view its path and stops on the map",
+  
+  "map.routeOverview": "Route Overview",
+  "map.routeOverviewDesc": "Visualization of",
+  
+  "map.howToUse": "How to Use",
+  
+  "map.step1.title": "Select a Route",
+  "map.step1.desc": "Choose from the dropdown to view route details",
+  
+  "map.step2.title": "Explore the Map",
+  "map.step2.desc": "Zoom and pan to see route paths and stops",
+  
+  "map.step3.title": "Find Nearest Stop",
+  "map.step3.desc": "Click the location button 📍 to find nearby stops",
+  
+  "map.about.title": "About This Map",
+  "map.about.description": "Built with Mapbox GL JS and React Map GL, this interactive map showcases bus routes in Alor Setar using modern web technologies.",
+  
+  "map.features.title": "Features",
+  "map.features.item1": "Train-style route visualization",
+  "map.features.item2": "Interactive map with zoom/pan",
+  "map.features.item3": "Nearest stop finder",
+  "map.features.item4": "Real-time route selection",
+  
+  "map.nearestStop": "Nearest Bus Stop",
+  "map.nearestStopDesc": "The closest bus stop to your current location",
+  "map.navigateToStop": "Navigate to Stop",
+  "map.backToRoute": "Back to Route",
+  
+  "routeSelector.label": "Select Bus Route",
+  "routeSelector.placeholder": "-- Select a route --",
+  "routeSelector.comingSoon": "More routes will be added in the future!",
+  
+  "language": "Language",
+  "language.en": "English",
+  "language.ms": "Bahasa Melayu",
+
+  "home.apps.banner.title": "Mobile Apps Coming Soon!",
+  "home.apps.banner.subtitle": "We're developing mobile applications for Android and iOS. Get easy access to bus routes on the go.",
+  "home.apps.banner.button": "Sign Up for Notifications",
+  
+  "footer.buyMeCoffee": "Buy Me Coffee",
+  "footer.rights": "All Rights Reserved.",
+  
+  "timetable.title": "Bus Timetable",
+  "timetable.description": "Estimated departure times for each stop on this route.",
+  "timetable.stopName": "Stop Name",
+  "timetable.departureTimes": "Departure Times",
+  "timetable.disclaimer": "Note: Times are approximate and subject to traffic conditions."
+}
