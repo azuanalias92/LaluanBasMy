@@ -277,8 +277,6 @@ const Map = React.forwardRef<
       el.style.fontSize = "12px";
       el.innerHTML = `${index + 1}`;
 
-      console.log("stops", stop);
-
       // Create the marker with the custom element
       if (stop.marker != false) {
         const marker = new mapboxgl.Marker({ element: el })
@@ -370,35 +368,6 @@ const Map = React.forwardRef<
       <div className="map-info bg-white dark:bg-gray-800 p-2 m-2 rounded shadow absolute z-10 text-sm">
         Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
       </div>
-
-      {nearestBusStop && (
-        <div className="nearest-stop-info bg-white dark:bg-gray-800 p-3 m-2 rounded shadow absolute z-10 text-sm bottom-0 left-0 max-w-xs">
-          <h3 className="font-bold text-base mb-1">Nearest Bus Stop</h3>
-          <p>
-            <span className="font-medium">Stop:</span> {nearestBusStop.stop.name}
-          </p>
-          <p>
-            <span className="font-medium">Route:</span> {nearestBusStop.route.name}
-          </p>
-          <p>
-            <span className="font-medium">Distance:</span> {nearestBusStop.distance.toFixed(2)} km
-          </p>
-          <button
-            className="mt-2 px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors text-xs"
-            onClick={() => {
-              if (map.current) {
-                map.current.flyTo({
-                  center: nearestBusStop.stop.coordinates,
-                  zoom: 15,
-                  essential: true,
-                });
-              }
-            }}
-          >
-            Navigate to Stop
-          </button>
-        </div>
-      )}
 
       <div ref={mapContainer} className={className} />
     </div>

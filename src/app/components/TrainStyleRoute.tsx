@@ -23,11 +23,10 @@ export default function TrainStyleRoute({ route, className = "" }: TrainStyleRou
         <p className="text-sm text-muted-foreground">{route.description}</p>
       </div>
 
-      <div className="px-2 py-8 overflow-x-auto w-full">
-        {/* Row for bullets + connecting lines */}
-        <div className="flex items-center ">
-          {route.stops.map((stop, index) => (
-            <div key={index} className="flex items-center">
+      <div className="grid grid-cols-3 md:grid-cols-9 gap-2">
+        {route.stops.map((stop, index) => (
+          <div key={index} className="contents">
+            <div className="items-center">
               {/* Bullet */}
               <div className="flex flex-col items-center">
                 <Badge
@@ -41,35 +40,15 @@ export default function TrainStyleRoute({ route, className = "" }: TrainStyleRou
                   {index + 1}
                 </Badge>
               </div>
-
-              {/* Connector line */}
-              {index !== route.stops.length - 1 && (
-                <div
-                  className="h-1 w-12 " // fixed width segment between bullets
-                  style={{
-                    backgroundColor: route.color,
-                  }}
-                />
-              )}
             </div>
-          ))}
-        </div>
-
-        {/* Row for labels */}
-        <div className="flex items-start mt-8">
-          {route.stops.map((stop, index) => (
-            <div
-              key={index}
-              className="flex flex-col items-start pe-8"
-              style={{ width: "calc(2.5rem + 4rem)" }} // bullet width (2.5rem) + line width (4rem)
-            >
+            <div className="col-span-2 items-center">
               <div className="font-medium text-sm leading-tight">{stop.name}</div>
               <div className="text-xs text-muted-foreground mt-1">
                 {stop.coordinates[1].toFixed(4)}, {stop.coordinates[0].toFixed(4)}
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
     </div>
   );

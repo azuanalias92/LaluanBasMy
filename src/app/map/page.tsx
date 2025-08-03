@@ -93,6 +93,14 @@ export default function MapPage() {
             </CardContent>
           </Card>
 
+          {selectedRoute && (
+            <Card>
+              <CardContent className="p-4">
+                <TrainStyleRoute route={selectedRoute} />
+              </CardContent>
+            </Card>
+          )}
+
           {/* Bus Timetable */}
           {selectedRoute && <BusTimetable route={selectedRoute} className="mt-6" />}
         </div>
@@ -100,14 +108,10 @@ export default function MapPage() {
         {/* Sidebar */}
         <div className="space-y-6">
           {/* Route Visualization or Nearest Stop */}
-          {showNearestStop && (
+          {showNearestStop && nearestBusStop && (
             <Card>
               <CardContent>
-                {showNearestStop && nearestBusStop ? (
-                  <NearestBusStop stop={nearestBusStop.stop} route={nearestBusStop.route} distance={nearestBusStop.distance} onNavigate={navigateToStop} />
-                ) : selectedRoute ? (
-                  <TrainStyleRoute route={selectedRoute} />
-                ) : null}
+                <NearestBusStop stop={nearestBusStop.stop} route={nearestBusStop.route} distance={nearestBusStop.distance} onNavigate={navigateToStop} />
               </CardContent>
             </Card>
           )}

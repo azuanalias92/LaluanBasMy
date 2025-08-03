@@ -47,14 +47,6 @@ export default function RouteSelector({ routes, onRouteSelect, className = "" }:
         </Select>
         <p className="text-xs text-muted-foreground mt-1 italic">{t("routeSelector.comingSoon")}</p>
       </div>
-
-      {selectedRouteId && (
-        <Card>
-          <CardContent className="p-4">
-            <TrainStyleRoute route={routes.find((r) => r.id === selectedRouteId) || null} />
-          </CardContent>
-        </Card>
-      )}
     </div>
   );
 }
