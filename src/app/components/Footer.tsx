@@ -18,7 +18,7 @@ export function Footer() {
           </div>
           <div className="flex flex-col md:flex-row items-center gap-4">
             <Link
-              href="https://github.com/azuanalias/BasMY"
+              href="https://github.com/azuanalias92/LaluanBasMy"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"

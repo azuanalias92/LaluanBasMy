@@ -91,10 +91,12 @@ export async function getRouteCoordinates(stops: BusStop[]): Promise<[number, nu
  * @param isLoop Whether to create a loop by connecting the last stop back to the first
  * @returns Promise that resolves when the route is added to the map
  */
-export async function addRouteToMap(map: mapboxgl.Map, sourceId: string, stops: BusStop[], color: string, geometries: [number, number][]): Promise<void> {
+export async function addRouteToMap(map: mapboxgl.Map, sourceId: string, stops: BusStop[], color: string, geometries?: [number, number][]): Promise<void> {
   try {
     // Get route coordinates that follow roads
     const coordinates = geometries ? geometries : await getRouteCoordinates(stops);
+
+    //console.log("geometries", coordinates);
 
     // Add the source if it doesn't exist
     if (!map.getSource(sourceId)) {

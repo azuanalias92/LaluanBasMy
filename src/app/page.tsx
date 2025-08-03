@@ -114,9 +114,9 @@ export default function Home() {
               <p className="text-muted-foreground max-w-md">
                 {t("home.apps.banner.subtitle")}
               </p>
-              <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
+              {/* <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
                 {t("home.apps.banner.button")}
-              </Button>
+              </Button> */}
             </div>
             <div className="flex items-center gap-4">
               <div className="relative w-[120px] h-[240px] rounded-3xl border-8 border-muted-foreground/20 bg-background shadow-lg overflow-hidden">

@@ -304,7 +304,7 @@ const Map = React.forwardRef<
       .then(({ addRouteToMap }) => {
         if (map.current) {
           // Create a loop route by connecting the last stop back to the first
-          addRouteToMap(map.current, sourceId, selectedRoute.stops, selectedRoute.color, selectedRoute.geometries).catch((error) => {
+          addRouteToMap(map.current, sourceId, selectedRoute.stops, selectedRoute.color, selectedRoute?.geometries).catch((error) => {
             console.error("Failed to add route to map:", error);
 
             // Fallback to straight lines if the directions API fails

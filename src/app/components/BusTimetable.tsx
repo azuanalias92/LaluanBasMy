@@ -97,25 +97,26 @@ export default function BusTimetable({ route, className = "" }: BusTimetableProp
               </TableRow>
             </TableHeader>
             <TableBody>
-              {timetableData?.map((entry, index) => (
-                <TableRow key={index}>
-                  <TableCell className="font-medium">{entry.stopName}</TableCell>
-                  <TableCell>
-                    <div className="flex flex-wrap gap-2">
-                      {timetableData[0].times.map((time, timeIndex) => {
-                        console.log("entry", entry);
-                        const colorClass = colors[timeIndex % colors.length];
-                        const timeToDisplay = entry.addTime ? addMinutes(time, entry.addTime) : time;
-                        return (
-                          <span key={timeIndex} className={`px-2 py-1 ${colorClass} rounded-md text-xs`}>
-                            {timeToDisplay}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))}
+              {timetableData?.map((entry, index) => {
+                return (
+                  <TableRow key={index}>
+                    <TableCell className="font-medium">{entry.stopName}</TableCell>
+                    <TableCell>
+                      <div className="flex flex-wrap gap-2">
+                        {timetableData[0].times.map((time, timeIndex) => {
+                          const colorClass = colors[timeIndex % colors.length];
+                          const timeToDisplay = entry.addTime ? addMinutes(time, entry.addTime) : time;
+                          return (
+                            <span key={timeIndex} className={`px-2 py-1 ${colorClass} rounded-md text-xs`}>
+                              {timeToDisplay}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                );
+              })}
             </TableBody>
           </Table>
         </div>
