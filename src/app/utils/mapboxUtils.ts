@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * Utility functions for Mapbox API operations
  */
@@ -77,9 +78,6 @@ export async function getRouteCoordinates(stops: BusStop[]): Promise<[number, nu
     console.error("Error fetching route directions:", error);
     // Fallback to straight lines if there's an error
     const coordinates = stops.map((stop) => stop.coordinates);
-    if (isLoop && coordinates.length > 0) {
-      coordinates.push(coordinates[0]); // Add first point again to close the loop
-    }
     return coordinates;
   }
 }

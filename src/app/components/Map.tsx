@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import React, { useEffect, useRef, useState, useImperativeHandle } from "react";
@@ -47,7 +48,6 @@ const Map = React.forwardRef<
   const routeMarkersRef = useRef<mapboxgl.Marker[]>([]);
   const routeLineRef = useRef<string | null>(null);
   const userMarkerRef = useRef<mapboxgl.Marker | null>(null);
-  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [nearestBusStop, setNearestBusStop] = useState<{ stop: BusStop; route: BusRoute; distance: number } | null>(null);
 
   // Expose methods to parent component
@@ -114,7 +114,6 @@ const Map = React.forwardRef<
       geolocateControl.on("geolocate", (e: GeolocateEvent) => {
         const userLat = e.coords.latitude;
         const userLng = e.coords.longitude;
-        setUserLocation({ lat: userLat, lng: userLng });
 
         // Find nearest bus stop
         const nearest = findNearestBusStop(userLat, userLng, busRoutes);

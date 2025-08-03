@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { BusRoute } from "../data/busRoutes";
 import { Badge } from "@/components/ui/badge";
 
@@ -10,12 +10,6 @@ interface TrainStyleRouteProps {
 }
 
 export default function TrainStyleRoute({ route, className = "" }: TrainStyleRouteProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // This effect can be used for any animations or calculations needed for the loop
-  }, [route]);
-
   if (!route) {
     return null;
   }
