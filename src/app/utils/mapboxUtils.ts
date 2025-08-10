@@ -43,7 +43,7 @@ export async function getRouteCoordinates(stops: BusStop[]): Promise<[number, nu
     let coordinates: [number, number][] | PromiseLike<[number, number][]> = [];
     const geometryCoordinates: any[] = [];
     for (const stops of routeLegs) {
-      console.log("stops", stops);
+      // console.log("stops", stops);
       // Create waypoints from bus stops
       const waypoints = stops.map((stop) => ({
         coordinates: stop.coordinates,
@@ -94,10 +94,11 @@ export async function getRouteCoordinates(stops: BusStop[]): Promise<[number, nu
 export async function addRouteToMap(map: mapboxgl.Map, sourceId: string, stops: BusStop[], color: string, geometries?: [number, number][]): Promise<void> {
   try {
     // Get route coordinates that follow roads
-    const coordinates = geometries ? geometries : await getRouteCoordinates(stops);
+    const coordinates = geometries && geometries.length > 0 ? geometries : await getRouteCoordinates(stops);
 
-    //console.log("geometries", coordinates);
+    console.log("geometries", coordinates);
 
+    if (!sourceId) return;
     // Add the source if it doesn't exist
     if (!map.getSource(sourceId)) {
       map.addSource(sourceId, {

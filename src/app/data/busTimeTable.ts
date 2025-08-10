@@ -15,7 +15,7 @@ export interface Timetable {
 
 export const busTimeTables: BusTimeTable[] = [
   {
-    id: "k100",
+    id: "k101",
     name: "K100 - Bandar Alor Setar",
     description: "",
     color: "#2BB573",

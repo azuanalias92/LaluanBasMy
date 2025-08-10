@@ -23,7 +23,7 @@ export default function TrainStyleRoute({ route, className = "" }: TrainStyleRou
         <p className="text-sm text-muted-foreground">{route.description}</p>
       </div>
 
-      <div className="grid grid-cols-3 md:grid-cols-9 gap-2">
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
         {route.stops.map((stop, index) => (
           <div key={index} className="contents">
             <div className="items-center">

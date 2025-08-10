@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useLanguage } from "../context/LanguageContext";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../../components/ui/table";
 import { Clock } from "lucide-react";
-import { busTimeTables } from "../data/busTimeTable";
+import { BusTimeTable, busTimeTables } from "../data/busTimeTable";
 
 interface BusTimetableProps {
   route: BusRoute | null;
@@ -45,8 +45,7 @@ const colors = [
   "bg-stone-200",
 ];
 
-const getTimetable = (route: BusRoute): TimetableEntry[] => {
-  const busTimeTable = busTimeTables.find((item) => item.id === route.id) || { timeTable: [{ name: route.name, time: ["7:00"], addTime: 0 }] };
+const getTimetable = (busTimeTable: BusTimeTable, route: BusRoute): TimetableEntry[] => {
   return busTimeTable.timeTable.map((stop) => {
     return {
       stopName: stop.name || route.name,
@@ -76,7 +75,8 @@ export default function BusTimetable({ route, className = "" }: BusTimetableProp
     return null;
   }
 
-  const timetableData = busTimeTables ? getTimetable(route) : null;
+  const busTimeTable = busTimeTables.find((item) => item.id === route.id);
+  const timetableData = busTimeTable ? getTimetable(busTimeTable, route) : null;
 
   return (
     <Card className={`${className}`}>
@@ -87,41 +87,46 @@ export default function BusTimetable({ route, className = "" }: BusTimetableProp
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="text-sm text-muted-foreground mb-4">{t("timetable.description")}</div>
-        <div className="overflow-x-auto">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>{t("timetable.stopName")}</TableHead>
-                <TableHead>{t("timetable.departureTimes")}</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {timetableData?.map((entry, index) => {
-                return (
-                  <TableRow key={index}>
-                    <TableCell className="font-medium">{entry.stopName}</TableCell>
-                    <TableCell>
-                      <div className="flex flex-wrap gap-2">
-                        {timetableData[0].times.map((time, timeIndex) => {
-                          const colorClass = colors[timeIndex % colors.length];
-                          const timeToDisplay = entry.addTime ? addMinutes(time, entry.addTime) : time;
-                          return (
-                            <span key={timeIndex} className={`px-2 py-1 ${colorClass} rounded-md text-xs`}>
-                              {timeToDisplay}
-                            </span>
-                          );
-                        })}
-                      </div>
-                    </TableCell>
+        {timetableData ? (
+          <>
+            <div className="text-sm text-muted-foreground mb-4">{t("timetable.description")}</div>
+            <div className="overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>{t("timetable.stopName")}</TableHead>
+                    <TableHead>{t("timetable.departureTimes")}</TableHead>
                   </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </div>
-
-        <div className="mt-4 text-xs text-muted-foreground italic">{t("timetable.disclaimer")}</div>
+                </TableHeader>
+                <TableBody>
+                  {timetableData?.map((entry, index) => {
+                    return (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">{entry.stopName}</TableCell>
+                        <TableCell>
+                          <div className="flex flex-wrap gap-2">
+                            {timetableData[0].times.map((time, timeIndex) => {
+                              const colorClass = colors[timeIndex % colors.length];
+                              const timeToDisplay = entry.addTime ? addMinutes(time, entry.addTime) : time;
+                              return (
+                                <span key={timeIndex} className={`px-2 py-1 ${colorClass} rounded-md text-xs`}>
+                                  {timeToDisplay}
+                                </span>
+                              );
+                            })}
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </div>
+            <div className="mt-4 text-xs text-muted-foreground italic">{t("timetable.disclaimer")}</div>
+          </>
+        ) : (
+          <div className="text-red-500 font-bold">{t("timetable.no-timetable")}</div>
+        )}
       </CardContent>
     </Card>
   );
