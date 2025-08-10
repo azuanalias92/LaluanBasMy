@@ -17,7 +17,7 @@ export interface BusStop {
 export const busRoutes: BusRoute[] = [
   {
     id: "k10",
-    name: "K10 - Shabab Perdana <-> Kuala Kedah",
+    name: "K10",
     description: "Shabab Perdana <-> Kuala Kedah",
     color: "#f058a5",
     stops: [
@@ -935,8 +935,8 @@ export const busRoutes: BusRoute[] = [
   // },
   {
     id: "k101",
-    name: "K100 - Bandar Alor Setar (Arah Mergong)",
-    description: "",
+    name: "K100",
+    description: "Bandar Alor Setar (Arah Mergong)",
     color: "#2BB573",
     stops: [
       { name: "Shahab Perdana", coordinates: [100.3542, 6.140313] },
@@ -1103,8 +1103,8 @@ export const busRoutes: BusRoute[] = [
   },
   {
     id: "k100",
-    name: "K100 - Bandar Alor Setar (Arah Alor Merah)",
-    description: "",
+    name: "K100",
+    description: "Bandar Alor Setar (Arah Alor Merah)",
     color: "#2BB573",
     stops: [
       { name: "Shahab Perdana", coordinates: [100.3542, 6.140313] },

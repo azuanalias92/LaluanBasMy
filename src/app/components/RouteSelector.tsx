@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import { BusRoute } from "../data/busRoutes";
-import TrainStyleRoute from "./TrainStyleRoute";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Card, CardContent } from "@/components/ui/card";
 import { useLanguage } from "../context/LanguageContext";
+import { Badge } from "@/components/ui/badge";
 
 interface RouteSelectorProps {
   routes: BusRoute[];
@@ -40,7 +39,10 @@ export default function RouteSelector({ routes, onRouteSelect, className = "" }:
             <SelectItem value="undefined">{t("routeSelector.placeholder")}</SelectItem>
             {routes.map((route) => (
               <SelectItem key={route.id} value={route.id}>
-                {route.name}
+                <Badge variant="secondary" style={{ backgroundColor: `${route.color}20`, color: route.color }}>
+                  {route.name}
+                </Badge>
+                - {route.description}
               </SelectItem>
             ))}
           </SelectContent>

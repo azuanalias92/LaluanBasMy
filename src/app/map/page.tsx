@@ -53,7 +53,7 @@ export default function MapPage() {
   };
 
   return (
-    <div className="container mx-auto p-4 space-y-4">
+    <div className="container mx-auto p-2 sm:p-4 space-y-2">
       {/* Header */}
       <div className="space-y-2">
         <div className="flex items-center space-x-2">
@@ -70,19 +70,14 @@ export default function MapPage() {
         <div className="lg:col-span-2 space-y-6">
           <Card>
             <CardHeader>
-              <div className="flex items-center justify-between">
-                <div>
+              <div className="flex items-center  justify-between">
+                <div className="flex flex-col gap-4">
                   <CardTitle className="flex items-center space-x-2">
                     <Navigation className="h-5 w-5" />
                     <span>{t("map.routeExplorer")}</span>
                   </CardTitle>
                   <CardDescription>{t("map.routeExplorerDesc")}</CardDescription>
                 </div>
-                {selectedRoute && (
-                  <Badge variant="secondary" style={{ backgroundColor: `${selectedRoute.color}20`, color: selectedRoute.color }}>
-                    {selectedRoute.name}
-                  </Badge>
-                )}
               </div>
             </CardHeader>
             <CardContent className="space-y-4">
