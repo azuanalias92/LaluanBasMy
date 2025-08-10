@@ -50,6 +50,80 @@ const Map = React.forwardRef<
   const userMarkerRef = useRef<mapboxgl.Marker | null>(null);
   const [nearestBusStop, setNearestBusStop] = useState<{ stop: BusStop; route: BusRoute; distance: number } | null>(null);
 
+  const geolocateControlRef = useRef<mapboxgl.GeolocateControl | null>(null);
+
+  function addNearestStopLogic() {
+    // Remove previous control if exists
+    if (geolocateControlRef.current && map.current) {
+      map.current.removeControl(geolocateControlRef.current);
+      geolocateControlRef.current.off("geolocate", handleGeolocate); // remove old listener
+    }
+
+    const geolocateControl = new mapboxgl.GeolocateControl({
+      positionOptions: { enableHighAccuracy: true },
+      trackUserLocation: true,
+      showUserHeading: true,
+    });
+
+    geolocateControlRef.current = geolocateControl;
+    map.current?.addControl(geolocateControl, "top-right");
+
+    geolocateControl.on("geolocate", handleGeolocate);
+  }
+
+  const handleGeolocate = async (e: GeolocationPosition) => {
+    const userLat = e.coords.latitude;
+    const userLng = e.coords.longitude;
+
+    const filterBusRoutes = selectedRoute ? busRoutes.filter((route) => route.id === selectedRoute.id) : busRoutes;
+
+    const nearest = findNearestBusStop(userLat, userLng, filterBusRoutes);
+    setNearestBusStop(nearest);
+
+    onLocationFound?.(nearest);
+
+    if (!map.current) return;
+
+    if (userMarkerRef.current) {
+      userMarkerRef.current.setLngLat([userLng, userLat]);
+    } else {
+      userMarkerRef.current = new mapboxgl.Marker({ color: "#FF0000" }).setLngLat([userLng, userLat]).addTo(map.current);
+    }
+
+    if (nearest) {
+      const lineSourceId = "nearest-stop-line";
+
+      if (map.current.getSource(lineSourceId)) {
+        map.current.removeLayer(lineSourceId);
+        map.current.removeSource(lineSourceId);
+      }
+
+      try {
+        const { getRouteCoordinates } = await import("../utils/mapboxUtils");
+        const coordinates = await getRouteCoordinates([{ name: "Your Location", coordinates: [userLng, userLat] }, nearest.stop]);
+
+        map.current.addSource(lineSourceId, {
+          type: "geojson",
+          data: {
+            type: "Feature",
+            geometry: { type: "LineString", coordinates },
+            properties: {},
+          },
+        });
+
+        map.current.addLayer({
+          id: lineSourceId,
+          type: "line",
+          source: lineSourceId,
+          layout: { "line-join": "round", "line-cap": "round" },
+          paint: { "line-color": "#FF0000", "line-width": 3, "line-dasharray": [2, 1] },
+        });
+      } catch (err) {
+        console.error("Error getting route coordinates", err);
+      }
+    }
+  };
+
   // Expose methods to parent component
   useImperativeHandle(ref, () => ({
     flyToStop: (coordinates: [number, number]) => {
@@ -85,74 +159,6 @@ const Map = React.forwardRef<
       // Add navigation controls
       map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
     }
-  }
-
-  function addNearestStopLogic() {
-    const geolocateControl = new mapboxgl.GeolocateControl({
-      positionOptions: { enableHighAccuracy: true },
-      trackUserLocation: true,
-      showUserHeading: true,
-    });
-
-    map?.current?.addControl(geolocateControl, "top-right");
-
-    geolocateControl.on("geolocate", async (e) => {
-      const userLat = e.coords.latitude;
-      const userLng = e.coords.longitude;
-
-      console.log("selectedRoute", selectedRoute);
-      const filterBusRoutes = selectedRoute ? busRoutes.filter((route) => route.id === selectedRoute.id) : busRoutes;
-
-      const nearest = findNearestBusStop(userLat, userLng, filterBusRoutes);
-      setNearestBusStop(nearest);
-
-      if (onLocationFound) {
-        onLocationFound(nearest);
-      }
-
-      if (!map.current) return;
-
-      // User marker
-      if (userMarkerRef.current) {
-        userMarkerRef.current.setLngLat([userLng, userLat]);
-      } else {
-        userMarkerRef.current = new mapboxgl.Marker({ color: "#FF0000" }).setLngLat([userLng, userLat]).addTo(map.current);
-      }
-
-      // Draw route to nearest stop
-      if (nearest) {
-        const lineSourceId = "nearest-stop-line";
-
-        if (map.current.getSource(lineSourceId)) {
-          map.current.removeLayer(lineSourceId);
-          map.current.removeSource(lineSourceId);
-        }
-
-        try {
-          const { getRouteCoordinates } = await import("../utils/mapboxUtils");
-          const coordinates = await getRouteCoordinates([{ name: "Your Location", coordinates: [userLng, userLat] }, nearest.stop]);
-
-          map.current.addSource(lineSourceId, {
-            type: "geojson",
-            data: {
-              type: "Feature",
-              geometry: { type: "LineString", coordinates },
-              properties: {},
-            },
-          });
-
-          map.current.addLayer({
-            id: lineSourceId,
-            type: "line",
-            source: lineSourceId,
-            layout: { "line-join": "round", "line-cap": "round" },
-            paint: { "line-color": "#FF0000", "line-width": 3, "line-dasharray": [2, 1] },
-          });
-        } catch (err) {
-          console.error("Error getting route coordinates", err);
-        }
-      }
-    });
   }
 
   useEffect(() => {
