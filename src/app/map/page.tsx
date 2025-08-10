@@ -45,10 +45,19 @@ export default function MapPage() {
     }
   };
 
-  // Function to navigate to the nearest bus stop
+  // Function to navigate to the nearest bus stop and scroll map into view on mobile
   const navigateToStop = () => {
-    if (mapRef.current && nearestBusStop) {
-      mapRef.current.flyToStop(nearestBusStop.stop.coordinates);
+    if (!mapRef.current || !nearestBusStop) return;
+
+    // Move map to nearest bus stop
+    mapRef.current.flyToStop(nearestBusStop.stop.coordinates);
+
+    // If on mobile, scroll smoothly to the map container
+    if (window.innerWidth <= 768) {
+      const mapElement = document.getElementById("mapContainer");
+      if (mapElement) {
+        mapElement.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
   };
 

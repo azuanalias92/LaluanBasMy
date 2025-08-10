@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { BusRoute, BusStop } from '../data/busRoutes';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { MapPin, Navigation } from 'lucide-react';
-import { useLanguage } from '../context/LanguageContext';
+import React from "react";
+import { BusRoute, BusStop } from "../data/busRoutes";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { MapPin, Navigation } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
 
 interface NearestBusStopProps {
   stop: BusStop;
@@ -15,13 +15,7 @@ interface NearestBusStopProps {
   className?: string;
 }
 
-export default function NearestBusStop({
-  stop,
-  route,
-  distance,
-  onNavigate,
-  className = '',
-}: NearestBusStopProps) {
+export default function NearestBusStop({ stop, route, distance, onNavigate, className = "" }: NearestBusStopProps) {
   const { t } = useLanguage();
 
   return (
@@ -29,9 +23,9 @@ export default function NearestBusStop({
       <div className="text-center space-y-2">
         <h3 className="text-lg font-bold flex items-center justify-center gap-2">
           <MapPin className="h-5 w-5" style={{ color: route.color }} />
-          <span style={{ color: route.color }}>{t('map.nearestStop')}</span>
+          <span style={{ color: route.color }}>{t("map.nearestStop")}</span>
         </h3>
-        <p className="text-sm text-muted-foreground">{t('map.nearestStopDesc')}</p>
+        <p className="text-sm text-muted-foreground">{t("map.nearestStopDesc")}</p>
       </div>
 
       <div className="space-y-4 p-4 border rounded-lg">
@@ -56,13 +50,9 @@ export default function NearestBusStop({
 
         <div className="pt-2 border-t">
           <div className="flex items-center space-x-2">
-            <Badge
-              variant="secondary"
-              className="h-6 flex items-center justify-center"
-              style={{ backgroundColor: `${route.color}20`, color: route.color }}
-            >
+            <Badge variant="secondary" className="h-6 flex items-center justify-center" style={{ backgroundColor: `${route.color}20`, color: route.color }}>
               <Navigation className="h-3 w-3 mr-1" />
-              {route.name}
+              {route.name} - {route.description}
             </Badge>
           </div>
         </div>
@@ -73,11 +63,11 @@ export default function NearestBusStop({
             className="w-full mt-2"
             style={{
               backgroundColor: route.color,
-              color: '#fff',
-              border: 'none',
+              color: "#fff",
+              border: "none",
             }}
           >
-            {t('map.navigateToStop')}
+            {t("map.navigateToStop")}
           </Button>
         )}
       </div>

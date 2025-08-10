@@ -293,7 +293,7 @@ const Map = React.forwardRef<
       <div className="map-info bg-white dark:bg-gray-800 p-2 m-2 rounded shadow  z-10 text-sm">
         Longitude: {lng} | Latitude: {lat} | Zoom: {zoom}
       </div>
-      <div ref={mapContainer} className={className} />
+      <div id="mapContainer" ref={mapContainer} className={className} />
     </div>
   );
 });
