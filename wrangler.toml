@@ -1,5 +1,5 @@
 name = "laluanbas-my"
-main = "build/_worker.js"
+pages_build_output_dir = "./out"
 compatibility_date = "2023-05-18"
 
 [site]
