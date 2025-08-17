@@ -22,7 +22,7 @@ export default function NotFound() {
           <CardDescription className="text-lg">Page Not Found</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <p className="text-muted-foreground">The bus route you're looking for doesn't exist or has been moved.</p>
+          <p className="text-muted-foreground">The bus route you are looking for does not exist or has been moved.</p>
           <div className="flex flex-col gap-2">
             <Button asChild className="w-full">
               <Link href="/">

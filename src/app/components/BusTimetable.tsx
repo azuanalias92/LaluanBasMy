@@ -49,7 +49,7 @@ const generateTimes = (startTime: string, endTime: string, frequency: number): s
   const [startHour, startMin] = startTime.split(':').map(Number);
   const [endHour, endMin] = endTime.split(':').map(Number);
   
-  let currentTime = new Date();
+  const currentTime = new Date();
   currentTime.setHours(startHour, startMin, 0, 0);
   
   const endTimeDate = new Date();
