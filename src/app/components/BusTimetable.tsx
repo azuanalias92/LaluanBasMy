@@ -13,11 +13,10 @@ interface BusTimetableProps {
   className?: string;
 }
 
-// Mock timetable data - in a real app, this would come from an API or database
 interface TimetableEntry {
   stopName: string;
   times: string[];
-  addTime?: number;
+  addTime: number;
 }
 
 const colors = [
@@ -45,11 +44,36 @@ const colors = [
   "bg-stone-200",
 ];
 
+const generateTimes = (startTime: string, endTime: string, frequency: number): string[] => {
+  const times: string[] = [];
+  const [startHour, startMin] = startTime.split(':').map(Number);
+  const [endHour, endMin] = endTime.split(':').map(Number);
+  
+  let currentTime = new Date();
+  currentTime.setHours(startHour, startMin, 0, 0);
+  
+  const endTimeDate = new Date();
+  endTimeDate.setHours(endHour, endMin, 0, 0);
+  
+  while (currentTime <= endTimeDate) {
+    const hour = currentTime.getHours().toString().padStart(2, '0');
+    const minute = currentTime.getMinutes().toString().padStart(2, '0');
+    times.push(`${hour}:${minute}`);
+    currentTime.setMinutes(currentTime.getMinutes() + frequency);
+  }
+  
+  return times;
+};
+
 const getTimetable = (busTimeTable: BusTimeTable, route: BusRoute): TimetableEntry[] => {
+  const baseTimes = generateTimes("07:00", "22:30", busTimeTable.frequency || 30);
+  
   return busTimeTable.timeTable.map((stop) => {
+    const stopTimes = baseTimes.map(time => addMinutes(time, stop.addTime || 0));
+    
     return {
       stopName: stop.name || route.name,
-      times: stop.time || ["7:00"],
+      times: stopTimes,
       addTime: stop.addTime || 0,
     };
   });
@@ -61,8 +85,8 @@ const addMinutes = (timeStr: string, minutesToAdd: number): string => {
   date.setHours(hours);
   date.setMinutes(minutes + minutesToAdd);
 
-  // Format to HH:mm without leading 0 in hour
-  const resultHour = date.getHours();
+  // Format to HH:mm with leading 0 in hour
+  const resultHour = date.getHours().toString().padStart(2, "0");
   const resultMinute = date.getMinutes().toString().padStart(2, "0");
 
   return `${resultHour}:${resultMinute}`;
@@ -105,12 +129,11 @@ export default function BusTimetable({ route, className = "" }: BusTimetableProp
                         <TableCell className="font-medium">{entry.stopName}</TableCell>
                         <TableCell>
                           <div className="flex flex-wrap gap-2">
-                            {timetableData[0].times.map((time, timeIndex) => {
+                            {entry.times.map((time, timeIndex) => {
                               const colorClass = colors[timeIndex % colors.length];
-                              const timeToDisplay = entry.addTime ? addMinutes(time, entry.addTime) : time;
                               return (
                                 <span key={timeIndex} className={`px-2 py-1 ${colorClass} rounded-md text-xs`}>
-                                  {timeToDisplay}
+                                  {time}
                                 </span>
                               );
                             })}
