@@ -1,0 +1,10 @@
+name = "laluanbas-my"
+main = "build/_worker.js"
+compatibility_date = "2023-05-18"
+
+[site]
+bucket = "./out"
+
+[[env.production.routes]]
+pattern = "laluanbasmy.pages.dev/*"
+zone_name = "laluanbasmy.pages.dev"
