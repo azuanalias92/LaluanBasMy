@@ -15,15 +15,11 @@ interface DevMapProps {
   className?: string;
 }
 
-export default function DevMap({ 
-  stops, 
-  onCoordinateSelect, 
-  selectedStopIndex, 
-  className = "w-full h-[400px] rounded-lg" 
-}: DevMapProps) {
+export default function DevMap({ stops, onCoordinateSelect, selectedStopIndex, className = "w-full h-[400px] rounded-lg" }: DevMapProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
+  const clickMarkersRef = useRef<mapboxgl.Marker[]>([]);
   const [lng, setLng] = useState(100.367821);
   const [lat, setLat] = useState(6.1248);
   const [zoom, setZoom] = useState(12);
@@ -48,10 +44,29 @@ export default function DevMap({
 
     // Add click handler for coordinate selection
     map.current.on("click", (e) => {
-      const coordinates: [number, number] = [
-        parseFloat(e.lngLat.lng.toFixed(6)),
-        parseFloat(e.lngLat.lat.toFixed(6))
-      ];
+      const coordinates: [number, number] = [parseFloat(e.lngLat.lng.toFixed(6)), parseFloat(e.lngLat.lat.toFixed(6))];
+
+      // Create a new marker at the clicked location
+      const el = document.createElement("div");
+      el.className = "click-marker";
+      el.style.width = "20px";
+      el.style.height = "20px";
+      el.style.borderRadius = "50%";
+      el.style.backgroundColor = "#ef4444";
+      el.style.border = "2px solid white";
+      el.style.boxShadow = "0 0 0 2px rgba(0,0,0,0.1)";
+
+      // Create and add the marker
+      const clickMarker = new mapboxgl.Marker({ element: el })
+        .setLngLat(coordinates)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setHTML(`<div style="text-align: center;">Clicked Location<br>${coordinates[0]}, ${coordinates[1]}</div>`))
+        .addTo(map.current!);
+
+      // Add to our collection of click markers
+      clickMarkersRef.current.push(clickMarker);
+
+      // Pass coordinates to parent component
+      console.log("coordinates", coordinates);
       onCoordinateSelect(coordinates);
     });
 
@@ -59,11 +74,14 @@ export default function DevMap({
     map.current.addControl(new mapboxgl.NavigationControl(), "top-right");
 
     // Add geolocate control
-    map.current.addControl(new mapboxgl.GeolocateControl({
-      positionOptions: { enableHighAccuracy: true },
-      trackUserLocation: true,
-      showUserHeading: true,
-    }), "top-right");
+    map.current.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: { enableHighAccuracy: true },
+        trackUserLocation: true,
+        showUserHeading: true,
+      }),
+      "top-right"
+    );
   }
 
   // Update markers when stops change
@@ -71,7 +89,7 @@ export default function DevMap({
     if (!map.current) return;
 
     // Clear existing markers
-    markersRef.current.forEach(marker => marker.remove());
+    markersRef.current.forEach((marker) => marker.remove());
     markersRef.current = [];
 
     // Add markers for all stops
@@ -102,7 +120,7 @@ export default function DevMap({
                 <div style="font-size: 12px; color: #666;">
                   ${stop.coordinates[0]}, ${stop.coordinates[1]}
                 </div>
-                ${index === selectedStopIndex ? '<div style="color: #ef4444; font-size: 12px;">Currently selected</div>' : ''}
+                ${index === selectedStopIndex ? '<div style="color: #ef4444; font-size: 12px;">Currently selected</div>' : ""}
               </div>`
             )
           )
@@ -113,7 +131,7 @@ export default function DevMap({
     });
 
     // Fit bounds to show all stops if there are any
-    if (stops.length > 0 && stops.some(stop => stop.coordinates[0] !== 0 && stop.coordinates[1] !== 0)) {
+    if (stops.length > 0 && stops.some((stop) => stop.coordinates[0] !== 0 && stop.coordinates[1] !== 0)) {
       const bounds = new mapboxgl.LngLatBounds();
       stops.forEach((stop) => {
         if (stop.coordinates[0] !== 0 && stop.coordinates[1] !== 0) {
@@ -132,6 +150,12 @@ export default function DevMap({
     initMap();
 
     return () => {
+      // Clean up all click markers
+      clickMarkersRef.current.forEach((marker) => {
+        if (marker) marker.remove();
+      });
+      clickMarkersRef.current = [];
+
       if (map.current) {
         map.current.remove();
         map.current = null;
@@ -144,7 +168,9 @@ export default function DevMap({
       <div className="text-sm text-muted-foreground bg-muted p-2 rounded">
         <div className="flex justify-between">
           <span>Click on map to set coordinates for selected stop</span>
-          <span>Lng: {lng}, Lat: {lat}, Zoom: {zoom}</span>
+          <span>
+            Lng: {lng}, Lat: {lat}, Zoom: {zoom}
+          </span>
         </div>
       </div>
       <div ref={mapContainer} className={className} />

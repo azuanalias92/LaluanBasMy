@@ -25,8 +25,8 @@ export default function DevPage() {
     name: "",
     description: "",
     color: "#2BB573",
-    stops: [{ name: "", coordinates: [0, 0] }],
-    geometries: []
+    stops: [], // Start with empty stops array
+    geometries: [],
   });
 
   const [geometriesText, setGeometriesText] = useState("");
@@ -34,18 +34,18 @@ export default function DevPage() {
   const [selectedStopIndex, setSelectedStopIndex] = useState(0);
 
   const addStop = () => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      stops: [...prev.stops, { name: "", coordinates: [0, 0] }]
+      stops: [...prev.stops, { name: "", coordinates: [0, 0] }],
     }));
     setSelectedStopIndex(formData.stops.length);
   };
 
   const removeStop = (index: number) => {
     if (formData.stops.length > 1) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        stops: prev.stops.filter((_, i) => i !== index)
+        stops: prev.stops.filter((_, i) => i !== index),
       }));
       if (selectedStopIndex >= index && selectedStopIndex > 0) {
         setSelectedStopIndex(selectedStopIndex - 1);
@@ -54,18 +54,26 @@ export default function DevPage() {
   };
 
   const updateStop = (index: number, field: keyof BusStop, value: string | [number, number]) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      stops: prev.stops.map((stop, i) => 
-        i === index ? { ...stop, [field]: value } : stop
-      )
+      stops: prev.stops.map((stop, i) => (i === index ? { ...stop, [field]: value } : stop)),
     }));
   };
 
   const handleCoordinateSelect = (coordinates: [number, number]) => {
-    if (selectedStopIndex < formData.stops.length) {
-      updateStop(selectedStopIndex, 'coordinates', coordinates);
-    }
+    setFormData((prev) => {
+      const stopNumber = prev.stops.length + 1;
+      const newStopName = `Stop ${stopNumber}`;
+      const updatedStops = [...prev.stops, { name: newStopName, coordinates }];
+
+      // Select the newly added stop immediately
+      setSelectedStopIndex(updatedStops.length - 1);
+
+      return {
+        ...prev,
+        stops: updatedStops,
+      };
+    });
   };
 
   const updateGeometries = (text: string) => {
@@ -73,7 +81,7 @@ export default function DevPage() {
     try {
       const parsed = JSON.parse(text);
       if (Array.isArray(parsed)) {
-        setFormData(prev => ({ ...prev, geometries: parsed }));
+        setFormData((prev) => ({ ...prev, geometries: parsed }));
       }
     } catch {
       // Invalid JSON, keep existing geometries
@@ -87,7 +95,7 @@ export default function DevPage() {
       description: formData.description,
       color: formData.color,
       stops: formData.stops,
-      ...(formData.geometries.length > 0 && { geometries: formData.geometries })
+      ...(formData.geometries.length > 0 && { geometries: formData.geometries }),
     };
     setPreviewJson(JSON.stringify(route, null, 2));
   };
@@ -99,12 +107,12 @@ export default function DevPage() {
       description: formData.description,
       color: formData.color,
       stops: formData.stops,
-      ...(formData.geometries.length > 0 && { geometries: formData.geometries })
+      ...(formData.geometries.length > 0 && { geometries: formData.geometries }),
     };
-    
-    const blob = new Blob([JSON.stringify(route, null, 2)], { type: 'application/json' });
+
+    const blob = new Blob([JSON.stringify(route, null, 2)], { type: "application/json" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = `route-${formData.id}.json`;
     document.body.appendChild(a);
@@ -126,7 +134,7 @@ export default function DevPage() {
             description: route.description,
             color: route.color,
             stops: route.stops,
-            geometries: route.geometries || []
+            geometries: route.geometries || [],
           });
           if (route.geometries) {
             setGeometriesText(JSON.stringify(route.geometries, null, 2));
@@ -139,8 +147,10 @@ export default function DevPage() {
     }
   };
 
+  console.log("selectedStopIndex", selectedStopIndex);
+
   return (
-    <div className="container mx-auto p-6 max-w-4xl">
+    <div className="container mx-auto p-6">
       <div className="space-y-6">
         <div className="text-center">
           <h1 className="text-3xl font-bold">Route Development Tool</h1>
@@ -151,16 +161,10 @@ export default function DevPage() {
         <Card>
           <CardHeader>
             <CardTitle>Interactive Map</CardTitle>
-            <CardDescription>
-              Click on the map to set coordinates for the selected stop (Stop {selectedStopIndex + 1})
-            </CardDescription>
+            <CardDescription>Click on the map to set coordinates for the selected stop (Stop {selectedStopIndex + 1})</CardDescription>
           </CardHeader>
           <CardContent>
-            <DevMap 
-              stops={formData.stops}
-              onCoordinateSelect={handleCoordinateSelect}
-              selectedStopIndex={selectedStopIndex}
-            />
+            <DevMap stops={formData.stops} onCoordinateSelect={handleCoordinateSelect} selectedStopIndex={selectedStopIndex} />
           </CardContent>
         </Card>
 
@@ -174,22 +178,12 @@ export default function DevPage() {
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="routeId">Route ID</Label>
-                <Input
-                  id="routeId"
-                  value={formData.id}
-                  onChange={(e) => setFormData(prev => ({ ...prev, id: e.target.value }))}
-                  placeholder="e.g., k10, k100"
-                />
+                <Input id="routeId" value={formData.id} onChange={(e) => setFormData((prev) => ({ ...prev, id: e.target.value }))} placeholder="e.g., k10, k100" />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="routeName">Route Name</Label>
-                <Input
-                  id="routeName"
-                  value={formData.name}
-                  onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                  placeholder="e.g., K10, K100"
-                />
+                <Input id="routeName" value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} placeholder="e.g., K10, K100" />
               </div>
 
               <div className="space-y-2">
@@ -197,7 +191,7 @@ export default function DevPage() {
                 <Input
                   id="routeDescription"
                   value={formData.description}
-                  onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
                   placeholder="e.g., Shahab Perdana <-> Kuala Kedah"
                 />
               </div>
@@ -205,50 +199,24 @@ export default function DevPage() {
               <div className="space-y-2">
                 <Label htmlFor="routeColor">Route Color</Label>
                 <div className="flex gap-2">
-                  <Input
-                    id="routeColor"
-                    type="color"
-                    value={formData.color}
-                    onChange={(e) => setFormData(prev => ({ ...prev, color: e.target.value }))}
-                    className="w-16 h-10"
-                  />
-                  <Input
-                    value={formData.color}
-                    onChange={(e) => setFormData(prev => ({ ...prev, color: e.target.value }))}
-                    placeholder="#2BB573"
-                    className="flex-1"
-                  />
+                  <Input id="routeColor" type="color" value={formData.color} onChange={(e) => setFormData((prev) => ({ ...prev, color: e.target.value }))} className="w-16 h-10" />
+                  <Input value={formData.color} onChange={(e) => setFormData((prev) => ({ ...prev, color: e.target.value }))} placeholder="#2BB573" className="flex-1" />
                 </div>
               </div>
 
               <div className="space-y-2">
                 <Label>File Operations</Label>
                 <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    onClick={() => document.getElementById('fileInput')?.click()}
-                    className="flex-1"
-                  >
+                  <Button variant="outline" onClick={() => document.getElementById("fileInput")?.click()} className="flex-1">
                     <Upload className="h-4 w-4 mr-2" />
                     Load JSON
                   </Button>
-                  <Button
-                    variant="outline"
-                    onClick={downloadJson}
-                    className="flex-1"
-                    disabled={!formData.id}
-                  >
+                  <Button variant="outline" onClick={downloadJson} className="flex-1" disabled={!formData.id}>
                     <Download className="h-4 w-4 mr-2" />
                     Download
                   </Button>
                 </div>
-                <input
-                  id="fileInput"
-                  type="file"
-                  accept=".json"
-                  onChange={loadFromFile}
-                  className="hidden"
-                />
+                <input id="fileInput" type="file" accept=".json" onChange={loadFromFile} className="hidden" />
               </div>
             </CardContent>
           </Card>
@@ -265,22 +233,20 @@ export default function DevPage() {
               </div>
               <div className="max-h-96 overflow-y-auto space-y-3">
                 {formData.stops.map((stop, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className={`p-3 border rounded-lg space-y-2 cursor-pointer transition-colors ${
-                      selectedStopIndex === index ? 'border-blue-500 bg-blue-50 dark:bg-blue-950' : 'hover:bg-muted/50'
+                      selectedStopIndex === index ? "border-blue-500 bg-blue-50 dark:bg-blue-950" : "hover:bg-muted/50"
                     }`}
                     onClick={() => setSelectedStopIndex(index)}
                   >
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-2">
                         <Label className="text-sm font-medium">Stop {index + 1}</Label>
-                        {selectedStopIndex === index && (
-                          <MapPin className="h-4 w-4 text-blue-500" />
-                        )}
+                        {selectedStopIndex === index && <MapPin className="h-4 w-4 text-blue-500" />}
                       </div>
                       <Button
-                        variant="ghost"
+                        variant="destructive"
                         size="sm"
                         onClick={(e) => {
                           e.stopPropagation();
@@ -291,28 +257,23 @@ export default function DevPage() {
                         <Minus className="h-4 w-4" />
                       </Button>
                     </div>
-                    
-                    <Input
-                      value={stop.name}
-                      onChange={(e) => updateStop(index, 'name', e.target.value)}
-                      placeholder="Stop name"
-                      className="mb-2"
-                    />
-                    
+
+                    <Input value={stop.name} onChange={(e) => updateStop(index, "name", e.target.value)} placeholder="Stop name" className="mb-2" />
+
                     <div className="space-y-2">
                       <div className="grid grid-cols-2 gap-2">
                         <Input
                           type="number"
                           step="any"
                           value={stop.coordinates[0]}
-                          onChange={(e) => updateStop(index, 'coordinates', [parseFloat(e.target.value) || 0, stop.coordinates[1]])}
+                          onChange={(e) => updateStop(index, "coordinates", [parseFloat(e.target.value) || 0, stop.coordinates[1]])}
                           placeholder="Longitude"
                         />
                         <Input
                           type="number"
                           step="any"
                           value={stop.coordinates[1]}
-                          onChange={(e) => updateStop(index, 'coordinates', [stop.coordinates[0], parseFloat(e.target.value) || 0])}
+                          onChange={(e) => updateStop(index, "coordinates", [stop.coordinates[0], parseFloat(e.target.value) || 0])}
                           placeholder="Latitude"
                         />
                       </div>
@@ -325,7 +286,7 @@ export default function DevPage() {
                   </div>
                 ))}
               </div>
-              
+
               <Button onClick={addStop} variant="outline" className="w-full">
                 <Plus className="h-4 w-4 mr-2" />
                 Add Stop
@@ -334,7 +295,7 @@ export default function DevPage() {
           </Card>
 
           {/* Geometries */}
-          <Card>
+          {/* <Card>
             <CardHeader>
               <CardTitle>Route Geometries (Optional)</CardTitle>
               <CardDescription>JSON array of [longitude, latitude] coordinates for route path</CardDescription>
@@ -347,10 +308,10 @@ export default function DevPage() {
                 className="min-h-32 font-mono text-sm"
               />
             </CardContent>
-          </Card>
+          </Card> */}
 
           {/* JSON Preview */}
-          <Card>
+          <Card className="col-span-2">
             <CardHeader>
               <CardTitle>Route Preview</CardTitle>
               <CardDescription>Generated route object</CardDescription>
@@ -359,17 +320,13 @@ export default function DevPage() {
               <Button onClick={generatePreview} variant="outline" className="w-full">
                 Generate Preview
               </Button>
-              
-              {previewJson && (
-                <Textarea
-                  value={previewJson}
-                  readOnly
-                  className="min-h-32 font-mono text-sm"
-                />
-              )}
-              
+
+              {previewJson && <Textarea value={previewJson} readOnly className="min-h-32 font-mono text-sm" />}
+
               <div className="text-sm text-muted-foreground">
-                <p><strong>Instructions:</strong></p>
+                <p>
+                  <strong>Instructions:</strong>
+                </p>
                 <ul className="list-disc list-inside space-y-1">
                   <li>Fill in the route information and stops</li>
                   <li>Click &quot;Generate Preview&quot; to see the JSON output</li>

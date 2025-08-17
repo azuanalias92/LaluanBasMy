@@ -1,6 +1,7 @@
 name = "laluanbas-my"
 main = "build/_worker.js"
 compatibility_date = "2023-05-18"
+pages_build_output_dir = "./out"
 
 [site]
 bucket = "./out"
