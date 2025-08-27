@@ -18,9 +18,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     default: "LaluanBasMY - Bus Route Explorer",
-    template: "%s | LaluanBasMY"
+    template: "%s | LaluanBasMY",
   },
-  description: "Explore bus routes in Alor Setar, Kedah with interactive maps and real-time information. Find the best routes, schedules, and connections for public transportation.",
+  description:
+    "Explore bus routes in Alor Setar, Kedah with interactive maps and real-time information. Find the best routes, schedules, and connections for public transportation.",
   keywords: ["Bas MY", "LaluanBasMY", "bus routes", "Alor Setar", "Kedah", "public transport", "Malaysia", "bus schedule", "route planner", "transportation"],
   authors: [{ name: "LaluanBasMY Team" }],
   creator: "LaluanBasMY",
@@ -30,36 +31,37 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://laluanbas.my'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://laluanbas.my"),
   alternates: {
-    canonical: '/',
+    canonical: "/",
     languages: {
-      'en-US': '/en-US',
-      'ms-MY': '/ms-MY',
+      "en-US": "/en-US",
+      "ms-MY": "/ms-MY",
     },
   },
   openGraph: {
-    type: 'website',
-    locale: 'en_US',
-    url: '/',
-    title: 'LaluanBasMY - Bus Route Explorer',
-    description: 'Explore bus routes in Alor Setar, Kedah with interactive maps and real-time information. Find the best routes, schedules, and connections for public transportation.',
-    siteName: 'LaluanBasMY',
+    type: "website",
+    locale: "en_US",
+    url: "/",
+    title: "LaluanBasMY - Bus Route Explorer",
+    description:
+      "Explore bus routes in Alor Setar, Kedah with interactive maps and real-time information. Find the best routes, schedules, and connections for public transportation.",
+    siteName: "LaluanBasMY",
     images: [
       {
-        url: '/og-image.png',
+        url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: 'LaluanBasMY - Bus Route Explorer',
+        alt: "LaluanBasMY - Bus Route Explorer",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'LaluanBasMY - Bus Route Explorer',
-    description: 'Explore bus routes in Alor Setar, Kedah with interactive maps and real-time information.',
-    images: ['/og-image.png'],
-    creator: '@laluanbasmy',
+    card: "summary_large_image",
+    title: "LaluanBasMY - Bus Route Explorer",
+    description: "Explore bus routes in Alor Setar, Kedah with interactive maps and real-time information.",
+    images: ["/og-image.png"],
+    creator: "@laluanbasmy",
   },
   robots: {
     index: true,
@@ -67,22 +69,22 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
-    google: process.env.GOOGLE_SITE_VERIFICATION,
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
 };
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: 'white' },
-    { media: '(prefers-color-scheme: dark)', color: 'black' },
+    { media: "(prefers-color-scheme: light)", color: "white" },
+    { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
   maximumScale: 1,
 };
@@ -101,23 +103,23 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
-              "name": "LaluanBasMY",
-              "description": "Bus route explorer for Alor Setar, Kedah",
-              "url": process.env.NEXT_PUBLIC_SITE_URL || "https://laluanbas.my",
-              "potentialAction": {
+              name: "LaluanBasMY",
+              description: "Bus route explorer for Alor Setar, Kedah",
+              url: process.env.NEXT_PUBLIC_SITE_URL || "https://laluanbas.my",
+              potentialAction: {
                 "@type": "SearchAction",
-                "target": {
+                target: {
                   "@type": "EntryPoint",
-                  "urlTemplate": `${process.env.NEXT_PUBLIC_SITE_URL || "https://laluanbas.my"}/map?search={search_term_string}`
+                  urlTemplate: `${process.env.NEXT_PUBLIC_SITE_URL || "https://laluanbas.my"}/map?search={search_term_string}`,
                 },
-                "query-input": "required name=search_term_string"
+                "query-input": "required name=search_term_string",
               },
-              "publisher": {
+              publisher: {
                 "@type": "Organization",
-                "name": "LaluanBasMY",
-                "url": process.env.NEXT_PUBLIC_SITE_URL || "https://laluanbas.my"
-              }
-            })
+                name: "LaluanBasMY",
+                url: process.env.NEXT_PUBLIC_SITE_URL || "https://laluanbas.my",
+              },
+            }),
           }}
         />
       </head>
