@@ -62,16 +62,12 @@ export default function MapPage() {
   };
 
   return (
-    <div className="container mx-auto p-2 sm:p-4 space-y-2">
+    <div className="container mx-auto p-2 sm:p-8 space-y-4">
       {/* Header */}
       <div className="space-y-2">
         <div className="flex items-center space-x-2">
-          {/* <MapPin className="h-8 w-8 text-primary" /> */}
           <h1 className="text-3xl font-bold tracking-tight">{t("map.title")}</h1>
         </div>
-        {/* <p className="text-muted-foreground">
-          {t("map.subtitle")}
-        </p> */}
       </div>
 
       <div className="grid gap-4 lg:grid-cols-3">
@@ -104,9 +100,6 @@ export default function MapPage() {
               </CardContent>
             </Card>
           )}
-
-          {/* Bus Timetable */}
-          {selectedRoute && <BusTimetable route={selectedRoute} className="mt-6" />}
         </div>
 
         {/* Sidebar */}
@@ -180,6 +173,11 @@ export default function MapPage() {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        <div className="lg:col-span-3">
+          {/* Bus Timetable */}
+          {selectedRoute && <BusTimetable route={selectedRoute} className="mt-6" />}
         </div>
       </div>
     </div>

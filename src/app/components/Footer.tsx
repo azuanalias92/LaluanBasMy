@@ -9,12 +9,17 @@ export function Footer() {
   const { t } = useLanguage();
 
   return (
-    <footer className="border-t bg-muted/40">
-      <div className="container py-8">
+    <footer className="border-t bg-muted/40 ">
+      <div className="container py-4">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 mx-4">
           <div className="flex items-center gap-2 ">
             <MapPin className="h-5 w-5 text-primary" />
             <span className="font-bold">LaluanBasMY</span>
+          </div>
+          <div className="flex justify-center text-center text-sm text-muted-foreground">
+            <p>
+              © {new Date().getFullYear()} Azuan Alias. {t("footer.rights")}
+            </p>
           </div>
           <div className="flex flex-col md:flex-row items-center gap-4">
             <Link
@@ -34,11 +39,6 @@ export function Footer() {
               </Link>
             </Button>
           </div>
-        </div>
-        <div className="mt-6 text-center text-sm text-muted-foreground">
-          <p>
-            © {new Date().getFullYear()} Azuan Alias. {t("footer.rights")}
-          </p>
         </div>
       </div>
     </footer>
