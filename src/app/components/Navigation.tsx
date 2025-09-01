@@ -9,6 +9,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Navigation() {
   const pathname = usePathname();
@@ -93,6 +94,9 @@ export function Navigation() {
               <span className="font-bold">LaluanBasMY</span>
             </Link>
           </div>
+          
+          {/* Theme Toggle */}
+          <ThemeToggle />
           
           {/* Language Switcher */}
           <DropdownMenu>
