@@ -46,31 +46,31 @@ const colors = [
 
 const generateTimes = (startTime: string, endTime: string, frequency: number): string[] => {
   const times: string[] = [];
-  const [startHour, startMin] = startTime.split(':').map(Number);
-  const [endHour, endMin] = endTime.split(':').map(Number);
-  
+  const [startHour, startMin] = startTime.split(":").map(Number);
+  const [endHour, endMin] = endTime.split(":").map(Number);
+
   const currentTime = new Date();
   currentTime.setHours(startHour, startMin, 0, 0);
-  
+
   const endTimeDate = new Date();
   endTimeDate.setHours(endHour, endMin, 0, 0);
-  
+
   while (currentTime <= endTimeDate) {
-    const hour = currentTime.getHours().toString().padStart(2, '0');
-    const minute = currentTime.getMinutes().toString().padStart(2, '0');
+    const hour = currentTime.getHours().toString().padStart(2, "0");
+    const minute = currentTime.getMinutes().toString().padStart(2, "0");
     times.push(`${hour}:${minute}`);
     currentTime.setMinutes(currentTime.getMinutes() + frequency);
   }
-  
+
   return times;
 };
 
 const getTimetable = (busTimeTable: BusTimeTable, route: BusRoute): TimetableEntry[] => {
   const baseTimes = generateTimes("07:00", "22:30", busTimeTable.frequency || 30);
-  
+
   return busTimeTable.timeTable.map((stop) => {
-    const stopTimes = baseTimes.map(time => addMinutes(time, stop.addTime || 0));
-    
+    const stopTimes = baseTimes.map((time) => addMinutes(time, stop.addTime || 0));
+
     return {
       stopName: stop.name || route.name,
       times: stopTimes,
@@ -132,7 +132,7 @@ export default function BusTimetable({ route, className = "" }: BusTimetableProp
                             {entry.times.map((time, timeIndex) => {
                               const colorClass = colors[timeIndex % colors.length];
                               return (
-                                <span key={timeIndex} className={`px-2 py-1 ${colorClass} rounded-md text-xs`}>
+                                <span key={timeIndex} className={`px-2 py-1 ${colorClass} rounded-md text-xs text-black`}>
                                   {time}
                                 </span>
                               );

@@ -157,67 +157,15 @@ export default function DevPage() {
           <p className="text-muted-foreground mt-2">Create and manage bus routes for the application</p>
         </div>
 
-        {/* Interactive Map */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Interactive Map</CardTitle>
-            <CardDescription>Click on the map to set coordinates for the selected stop (Stop {selectedStopIndex + 1})</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <DevMap stops={formData.stops} onCoordinateSelect={handleCoordinateSelect} selectedStopIndex={selectedStopIndex} />
-          </CardContent>
-        </Card>
-
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Route Form */}
+          {/* Interactive Map */}
           <Card>
             <CardHeader>
-              <CardTitle>Route Information</CardTitle>
-              <CardDescription>Basic route details and configuration</CardDescription>
+              <CardTitle>Interactive Map</CardTitle>
+              <CardDescription>Click on the map to set coordinates for the selected stop (Stop {selectedStopIndex + 1})</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="routeId">Route ID</Label>
-                <Input id="routeId" value={formData.id} onChange={(e) => setFormData((prev) => ({ ...prev, id: e.target.value }))} placeholder="e.g., k10, k100" />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="routeName">Route Name</Label>
-                <Input id="routeName" value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} placeholder="e.g., K10, K100" />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="routeDescription">Description</Label>
-                <Input
-                  id="routeDescription"
-                  value={formData.description}
-                  onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
-                  placeholder="e.g., Shahab Perdana <-> Kuala Kedah"
-                />
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="routeColor">Route Color</Label>
-                <div className="flex gap-2">
-                  <Input id="routeColor" type="color" value={formData.color} onChange={(e) => setFormData((prev) => ({ ...prev, color: e.target.value }))} className="w-16 h-10" />
-                  <Input value={formData.color} onChange={(e) => setFormData((prev) => ({ ...prev, color: e.target.value }))} placeholder="#2BB573" className="flex-1" />
-                </div>
-              </div>
-
-              <div className="space-y-2">
-                <Label>File Operations</Label>
-                <div className="flex gap-2">
-                  <Button variant="outline" onClick={() => document.getElementById("fileInput")?.click()} className="flex-1">
-                    <Upload className="h-4 w-4 mr-2" />
-                    Load JSON
-                  </Button>
-                  <Button variant="outline" onClick={downloadJson} className="flex-1" disabled={!formData.id}>
-                    <Download className="h-4 w-4 mr-2" />
-                    Download
-                  </Button>
-                </div>
-                <input id="fileInput" type="file" accept=".json" onChange={loadFromFile} className="hidden" />
-              </div>
+            <CardContent>
+              <DevMap stops={formData.stops} onCoordinateSelect={handleCoordinateSelect} selectedStopIndex={selectedStopIndex} />
             </CardContent>
           </Card>
 
@@ -291,6 +239,58 @@ export default function DevPage() {
                 <Plus className="h-4 w-4 mr-2" />
                 Add Stop
               </Button>
+            </CardContent>
+          </Card>
+
+          {/* Route Form */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Route Information</CardTitle>
+              <CardDescription>Basic route details and configuration</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="routeId">Route ID</Label>
+                <Input id="routeId" value={formData.id} onChange={(e) => setFormData((prev) => ({ ...prev, id: e.target.value }))} placeholder="e.g., k10, k100" />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="routeName">Route Name</Label>
+                <Input id="routeName" value={formData.name} onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))} placeholder="e.g., K10, K100" />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="routeDescription">Description</Label>
+                <Input
+                  id="routeDescription"
+                  value={formData.description}
+                  onChange={(e) => setFormData((prev) => ({ ...prev, description: e.target.value }))}
+                  placeholder="e.g., Shahab Perdana <-> Kuala Kedah"
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="routeColor">Route Color</Label>
+                <div className="flex gap-2">
+                  <Input id="routeColor" type="color" value={formData.color} onChange={(e) => setFormData((prev) => ({ ...prev, color: e.target.value }))} className="w-16 h-10" />
+                  <Input value={formData.color} onChange={(e) => setFormData((prev) => ({ ...prev, color: e.target.value }))} placeholder="#2BB573" className="flex-1" />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label>File Operations</Label>
+                <div className="flex gap-2">
+                  <Button variant="outline" onClick={() => document.getElementById("fileInput")?.click()} className="flex-1">
+                    <Upload className="h-4 w-4 mr-2" />
+                    Load JSON
+                  </Button>
+                  <Button variant="outline" onClick={downloadJson} className="flex-1" disabled={!formData.id}>
+                    <Download className="h-4 w-4 mr-2" />
+                    Download
+                  </Button>
+                </div>
+                <input id="fileInput" type="file" accept=".json" onChange={loadFromFile} className="hidden" />
+              </div>
             </CardContent>
           </Card>
 

@@ -13,23 +13,23 @@ export default function Home() {
     {
       icon: MapPin,
       title: "Interactive Maps",
-      description: "Explore bus routes with detailed interactive maps powered by Mapbox GL"
+      description: "Explore bus routes with detailed interactive maps powered by Mapbox GL",
     },
     {
       icon: Navigation,
       title: "Route Planning",
-      description: "Find the best routes and connections for your journey across Alor Setar"
+      description: "Find the best routes and connections for your journey across Alor Setar",
     },
     {
       icon: Clock,
       title: "Real-time Updates",
-      description: "Get live information about bus schedules and route changes"
+      description: "Get live information about bus schedules and route changes",
     },
     {
       icon: Users,
       title: "Community Driven",
-      description: "Built for the community with user feedback and local insights"
-    }
+      description: "Built for the community with user feedback and local insights",
+    },
   ];
 
   return (
@@ -41,12 +41,8 @@ export default function Home() {
             <Badge variant="secondary" className="mb-4">
               {t("home.badge")}
             </Badge>
-            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">
-              {t("home.title")}
-            </h1>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              {t("home.subtitle")}
-            </p>
+            <h1 className="text-4xl font-bold tracking-tight sm:text-6xl">{t("home.title")}</h1>
+            <p className="mt-6 text-lg leading-8 text-muted-foreground">{t("home.subtitle")}</p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Button asChild size="lg">
                 <Link href="/map">
@@ -69,12 +65,8 @@ export default function Home() {
       <section id="features" className="py-24 sm:py-32">
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              {t("home.features.title")}
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              {t("home.features.subtitle")}
-            </p>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t("home.features.title")}</h2>
+            <p className="mt-6 text-lg leading-8 text-muted-foreground">{t("home.features.subtitle")}</p>
           </div>
           <div className="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-none">
             <div className="grid max-w-xl grid-cols-1 gap-x-4 gap-y-4 lg:max-w-none lg:grid-cols-2">
@@ -87,13 +79,11 @@ export default function Home() {
                         <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/10">
                           <Icon className="h-6 w-6 text-primary" />
                         </div>
-                        <CardTitle>{t(`home.feature${index+1}.title`)}</CardTitle>
+                        <CardTitle>{t(`home.feature${index + 1}.title`)}</CardTitle>
                       </div>
                     </CardHeader>
                     <CardContent>
-                      <CardDescription className="text-base">
-                        {t(`home.feature${index+1}.description`)}
-                      </CardDescription>
+                      <CardDescription className="text-base">{t(`home.feature${index + 1}.description`)}</CardDescription>
                     </CardContent>
                   </Card>
                 );
@@ -108,15 +98,8 @@ export default function Home() {
         <div className="container">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="space-y-4 text-center md:text-left">
-              <h2 className="text-2xl md:text-3xl font-bold text-primary">
-                {t("home.apps.banner.title")}
-              </h2>
-              <p className="text-muted-foreground max-w-md">
-                {t("home.apps.banner.subtitle")}
-              </p>
-              {/* <Button variant="outline" className="border-primary text-primary hover:bg-primary hover:text-primary-foreground">
-                {t("home.apps.banner.button")}
-              </Button> */}
+              <h2 className="text-2xl md:text-3xl font-bold text-primary">{t("home.apps.banner.title")}</h2>
+              <p className="text-muted-foreground max-w-md">{t("home.apps.banner.subtitle")}</p>
             </div>
             <div className="flex items-center gap-4">
               <div className="relative w-[120px] h-[240px] rounded-3xl border-8 border-muted-foreground/20 bg-background shadow-lg overflow-hidden">
@@ -148,12 +131,8 @@ export default function Home() {
       <section className="bg-muted/50 py-24 sm:py-32">
         <div className="container">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              {t("home.cta.title")}
-            </h2>
-            <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              {t("home.cta.subtitle")}
-            </p>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t("home.cta.title")}</h2>
+            <p className="mt-6 text-lg leading-8 text-muted-foreground">{t("home.cta.subtitle")}</p>
             <div className="mt-10 flex items-center justify-center gap-x-6">
               <Button asChild size="lg">
                 <Link href="/map">

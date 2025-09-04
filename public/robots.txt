@@ -9,7 +9,7 @@ Allow: /
 # Disallow: /api/
 
 # Allow all bots to access sitemap
-Sitemap: https://laluanbasmy.pages.dev/sitemap.xml
+Sitemap: https://laluanbas.my/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
