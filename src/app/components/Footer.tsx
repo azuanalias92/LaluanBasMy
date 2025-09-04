@@ -33,7 +33,7 @@ export function Footer() {
             </Link>
 
             <Button variant="outline" size="sm" className="flex items-center gap-2" asChild>
-              <Link href="https://www.buymeacoffee.com/azuanalias" target="_blank" rel="noopener noreferrer">
+              <Link href="https://ko-fi.com/azuanalias" target="_blank" rel="noopener noreferrer">
                 <Coffee className="h-4 w-4" />
                 <span>{t("footer.buyMeCoffee")}</span>
               </Link>

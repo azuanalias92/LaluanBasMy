@@ -73,7 +73,7 @@
   "home.apps.banner.subtitle": "We're developing mobile applications for Android and iOS. Get easy access to bus routes on the go.",
   "home.apps.banner.button": "Sign Up for Notifications",
 
-  "footer.buyMeCoffee": "Buy Me Coffee",
+  "footer.buyMeCoffee": "Support on Ko-fi",
   "footer.rights": "All Rights Reserved.",
 
   "timetable.title": "Bus Timetable",
@@ -96,14 +96,19 @@
   "seo.twitterDescription": "Explore bus routes in Alor Setar, Kedah with interactive maps and real-time information.",
   "seo.schemaName": "LaluanBasMY",
   "seo.schemaDescription": "Bus route explorer for Alor Setar, Kedah",
-  "structured_data.organization_name": "LaluanBasMY",
-  "structured_data.organization_description": "Leading platform for bus route information in Malaysia",
-  "structured_data.website_name": "LaluanBasMY",
-  "structured_data.website_description": "Find and check bus schedules, routes and travel information in Malaysia",
-  "share.copy": "Copy Link",
-  "share.button": "Share",
-  "share.native": "Share",
-  "share.title": "Share this page",
-  "share.description": "Share this bus route information with your friends",
-  "share.copied": "Copied!"
+
+  "structured_data": {
+    "organization_name": "LaluanBasMY",
+    "organization_description": "Leading platform for bus route information in Malaysia",
+    "website_name": "LaluanBasMY",
+    "website_description": "Find and check bus schedules, routes and travel information in Malaysia"
+  },
+  "share": {
+    "button": "Share",
+    "native": "Share",
+    "copy": "Copy Link",
+    "copied": "Copied!",
+    "title": "Share this page",
+    "description": "Share this bus route information with your friends"
+  }
 }

@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 "use client";
 
 import { generateStructuredData, createTranslationFunction, getTranslations } from "../utils/metadata";
