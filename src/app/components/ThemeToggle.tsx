@@ -15,19 +15,6 @@ export function ThemeToggle() {
     return actualTheme === "dark" ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />;
   };
 
-  const getLabel = () => {
-    switch (theme) {
-      case "light":
-        return "Light";
-      case "dark":
-        return "Dark";
-      case "system":
-        return "System";
-      default:
-        return "Theme";
-    }
-  };
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

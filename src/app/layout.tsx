@@ -5,7 +5,7 @@ import { Navigation } from "./components/Navigation";
 import { Footer } from "./components/Footer";
 import { LanguageProvider } from "./context/LanguageContext";
 import { ThemeProvider } from "./context/ThemeContext";
-import { generateMetadata as generateDynamicMetadata, generateStructuredData, getTranslations, createTranslationFunction } from "./utils/metadata";
+import { generateMetadata as generateDynamicMetadata, getTranslations, createTranslationFunction } from "./utils/metadata";
 import { StructuredDataScript } from "./components/StructuredDataScript";
 import SocialShareWidget from "./components/SocialShareWidget";
 

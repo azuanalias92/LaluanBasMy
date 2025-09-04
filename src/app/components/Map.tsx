@@ -48,7 +48,7 @@ const Map = React.forwardRef<
   const routeMarkersRef = useRef<mapboxgl.Marker[]>([]);
   const routeLineRef = useRef<string | null>(null);
   const userMarkerRef = useRef<mapboxgl.Marker | null>(null);
-  const [nearestBusStop, setNearestBusStop] = useState<{ stop: BusStop; route: BusRoute; distance: number } | null>(null);
+  //const [nearestBusStop, setNearestBusStop] = useState<{ stop: BusStop; route: BusRoute; distance: number } | null>(null);
 
   const geolocateControlRef = useRef<mapboxgl.GeolocateControl | null>(null);
 
@@ -78,7 +78,7 @@ const Map = React.forwardRef<
     const filterBusRoutes = selectedRoute ? busRoutes.filter((route) => route.id === selectedRoute.id) : busRoutes;
 
     const nearest = findNearestBusStop(userLat, userLng, filterBusRoutes);
-    setNearestBusStop(nearest);
+    //setNearestBusStop(nearest);
 
     onLocationFound?.(nearest);
 

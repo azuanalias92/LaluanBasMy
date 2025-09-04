@@ -13,7 +13,6 @@ interface MetadataConfig {
 }
 
 export function generateMetadata({ language, t, baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://laluanbas.my" }: MetadataConfig): Metadata {
-  const locale = language === 'ms' ? 'ms_MY' : 'en_US';
   const ogLocale = language === 'ms' ? 'ms_MY' : 'en_US';
   
   return {

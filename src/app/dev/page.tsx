@@ -29,7 +29,7 @@ export default function DevPage() {
     geometries: [],
   });
 
-  const [geometriesText, setGeometriesText] = useState("");
+  //const [geometriesText, setGeometriesText] = useState("");
   const [previewJson, setPreviewJson] = useState("");
   const [selectedStopIndex, setSelectedStopIndex] = useState(0);
 
@@ -74,18 +74,6 @@ export default function DevPage() {
         stops: updatedStops,
       };
     });
-  };
-
-  const updateGeometries = (text: string) => {
-    setGeometriesText(text);
-    try {
-      const parsed = JSON.parse(text);
-      if (Array.isArray(parsed)) {
-        setFormData((prev) => ({ ...prev, geometries: parsed }));
-      }
-    } catch {
-      // Invalid JSON, keep existing geometries
-    }
   };
 
   const generatePreview = () => {
@@ -136,9 +124,9 @@ export default function DevPage() {
             stops: route.stops,
             geometries: route.geometries || [],
           });
-          if (route.geometries) {
-            setGeometriesText(JSON.stringify(route.geometries, null, 2));
-          }
+          // if (route.geometries) {
+          //   setGeometriesText(JSON.stringify(route.geometries, null, 2));
+          // }
         } catch {
           alert("Invalid JSON file");
         }
